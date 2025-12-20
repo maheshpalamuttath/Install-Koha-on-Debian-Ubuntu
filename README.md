@@ -37,7 +37,7 @@ sudo curl -fsSL https://debian.koha-community.org/koha/gpg.asc -o /etc/apt/keyri
 sudo tee /etc/apt/sources.list.d/koha.sources <<EOF
 Types: deb
 URIs: https://debian.koha-community.org/koha/
-Suites: 24.05
+Suites: 24.11
 Components: main
 Signed-By: /etc/apt/keyrings/koha.asc
 EOF
@@ -60,7 +60,7 @@ Configure the site instances and Apache modules.
 
 * **Edit Site Config:**
 ```bash
-sudo nano /etc/koha/koha-sites.conf
+sudo mousepad /etc/koha/koha-sites.conf
 
 ```
 
