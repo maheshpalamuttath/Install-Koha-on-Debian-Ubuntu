@@ -32,7 +32,7 @@ sudo mkdir -p --mode=0755 /etc/apt/keyrings
 ```bash
 sudo curl -fsSL https://debian.koha-community.org/koha/gpg.asc -o /etc/apt/keyrings/koha.asc
 ```
-##### Add Koha LTS (24.05) source
+##### Add Koha LTS (24.11) source
 ```bash
 sudo tee /etc/apt/sources.list.d/koha.sources <<EOF
 Types: deb
