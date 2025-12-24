@@ -20,7 +20,50 @@ sudo apt install -y apt-transport-https ca-certificates curl sudo
 
 ```
 
-### 2. Configure Repositories
+### 2. Install and Secure MariaDB
+
+Koha requires a database backend. MariaDB is the recommended choice for Debian-based systems.
+
+```bash
+sudo apt install -y mariadb-server
+```
+
+```bash
+sudo mysql_secure_installation
+```
+
+Tip: During ``` mysql_secure_installation```, it is highly recommended to set a strong root password, remove anonymous users, and disallow root login remotely.
+
+### What to expect during the script
+
+The script will ask you 5-6 questions. For a Koha installation, follow these recommendations:
+
+1. **Enter current password for root:** Since this is a new install, there is no password. Just press **Enter**.
+2. **Switch to unix_socket authentication?** Usually, you can press **n** (No) here, as Koha often uses standard password authentication.
+3. **Change the root password?** Press **Y** (Yes) and create a strong password. **Save this password safely**—you may need it if you ever need to manually fix database issues.
+4. **Remove anonymous users?** Press **Y**. This prevents anyone from logging in without an account.
+5. **Disallow root login remotely?** Press **Y**. This ensures that the 'root' user can only log in from the server itself, not from the internet.
+6. **Remove test database?** Press **Y**. This removes a default database that is open to everyone.
+7. **Reload privilege tables now?** Press **Y** to apply all changes immediately.
+
+---
+
+### ⚠️ Important Note for Koha Users
+
+On modern systems (Ubuntu 22.04+ or Debian 12), MariaDB often uses `auth_socket` by default, meaning you log in with `sudo mariadb` without a password.
+
+If your `koha-create` command fails later with "Access Denied," you may need to manually set the root password method by running:
+
+```sql
+sudo mariadb
+-- Run this inside the MariaDB prompt:
+ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING 'YourPasswordHere';
+FLUSH PRIVILEGES;
+EXIT;
+
+```
+
+### 3. Configure Repositories
 
 Add the Koha GPG key and the official software source.
 
@@ -46,7 +89,7 @@ EOF
 
 > **Note:** You can check for other versions on the [Koha Wiki](https://wiki.koha-community.org/wiki/Koha_on_Debian).
 
-### 3. Install Koha
+### 4. Install Koha
 
 ```bash
 sudo apt update
@@ -54,7 +97,7 @@ sudo apt install -y koha-common
 
 ```
 
-### 4. Configuration
+### 5. Configuration
 
 Configure the site instances and Apache modules.
 
@@ -81,7 +124,7 @@ sudo koha-create --create-db library
 ```
 
 
-### 5. Network & Port Setup
+### 6. Network & Port Setup
 
 If you are doing an IP-based installation, you must tell Apache to listen on port 8080.
 
