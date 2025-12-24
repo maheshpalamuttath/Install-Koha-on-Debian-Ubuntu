@@ -86,7 +86,7 @@ sudo koha-create --create-db library
 If you are doing an IP-based installation, you must tell Apache to listen on port 8080.
 
 ```bash
-sudo nano /etc/apache2/ports.conf
+sudo mousepad /etc/apache2/ports.conf
 
 ```
 
