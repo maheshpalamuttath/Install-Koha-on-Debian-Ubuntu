@@ -103,7 +103,7 @@ Configure the site instances and Apache modules.
 
 * **Edit Site Config:**
 ```bash
-sudo mousepad /etc/koha/koha-sites.conf
+sudo nano /etc/koha/koha-sites.conf
 
 ```
 
@@ -129,7 +129,7 @@ sudo koha-create --create-db library
 If you are doing an IP-based installation, you must tell Apache to listen on port 8080.
 
 ```bash
-sudo mousepad /etc/apache2/ports.conf
+sudo nano /etc/apache2/ports.conf
 
 ```
 
